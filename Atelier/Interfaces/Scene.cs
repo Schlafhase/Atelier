@@ -6,6 +6,7 @@ namespace Atelier.Interfaces;
 public abstract class Scene
 {
 	public event ResizeEventHandler OnResize;
+	public event ClickEventHandler OnClick;
 	
 	public double Width { get; set; } = 100;
 	public double Height { get; set; } = 100;
@@ -34,5 +35,10 @@ public abstract class Scene
 		Width = width;
 		Height = height;
 		OnResize(new ResizeEventArgs(width, height));
+	}
+
+	public void Click(ClickEventArgs e)
+	{
+		OnClick(e);
 	}
 }
