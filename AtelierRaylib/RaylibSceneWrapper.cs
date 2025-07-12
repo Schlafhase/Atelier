@@ -17,6 +17,7 @@ public static class RaylibSceneWrapper
         Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
         Raylib.SetConfigFlags(ConfigFlags.MaximizedWindow);
         Raylib.InitWindow(800, 600, "AtelierRaylib");
+        scene.Init();
 
         double lastFrame = Raylib.GetTime();
         Color transparent = new Color(0, 0, 0, 0);

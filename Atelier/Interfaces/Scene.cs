@@ -11,29 +11,20 @@ public abstract class Scene : IDisposable
 	public double Height { get; private set; } = 1;
 	
 	public virtual List<AObject> Objects { get; protected set; } = [];
-	public virtual void OnLoad() { }
 
-	private Image _blankImage;
-	public Texture2D BlankTexture { get; private set; }
-
-	public void Init()
-	{
-		updateTexture();
-	}
-
-	private void updateTexture()
-	{
-		Raylib.UnloadTexture(BlankTexture);
-		_blankImage = Raylib.GenImageColor((int)Width, (int)Height, Color.White);
-		BlankTexture = Raylib.LoadTextureFromImage(_blankImage);
-		Raylib.UnloadImage(_blankImage);
-	}
-	
-	public virtual void Render()
+	public virtual void Init()
 	{
 		foreach (AObject obj in Objects)
 		{
 			obj.Parent = this;
+			obj.Init();
+		}
+	}
+
+	public virtual void Render()
+	{
+		foreach (AObject obj in Objects)
+		{
 			obj.Render();
 		}
 	}
@@ -55,12 +46,10 @@ public abstract class Scene : IDisposable
 		Width = width;
 		Height = height;
 		OnResize?.Invoke(new ResizeEventArgs(width, height));
-		updateTexture();
 	}
 
 	public void Dispose()
 	{
-		Raylib.UnloadTexture(BlankTexture);
 		foreach (AObject obj in Objects)
 		{
 			if (obj is IDisposable disposable)
