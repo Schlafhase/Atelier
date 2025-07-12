@@ -1,17 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Raylib-cs" Version="7.0.1" />
+      <ProjectReference Include="..\AtelierRaylib\AtelierRaylib.csproj" />
+      <ProjectReference Include="..\AtelierTestObjects\AtelierTestObjects.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ObjectTemplates\" />
+      <PackageReference Include="Raylib-cs" Version="7.0.1" />
     </ItemGroup>
 
 </Project>

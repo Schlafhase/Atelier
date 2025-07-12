@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Raylib-cs" Version="7.0.1" />
+      <ProjectReference Include="..\Atelier\Atelier.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ObjectTemplates\" />
+      <PackageReference Include="Raylib-cs" Version="7.0.1" />
     </ItemGroup>
 
 </Project>

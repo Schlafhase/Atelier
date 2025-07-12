@@ -1,12 +1,12 @@
-﻿using SkiaSharp;
-
-namespace Atelier.Interfaces;
+﻿namespace Atelier.Interfaces;
 
 public abstract class AObject
 {
-	public abstract void Render(SKCanvas canvas);
-	public virtual void Tick() { }
+	public abstract void Render();
+	public virtual void Tick(double dt = 16.6) { }
 	
 	public double X { get; set; }
 	public double Y { get; set; }
+	
+	public Scene? Parent { get; set; }
 }

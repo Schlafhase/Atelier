@@ -1,44 +1,72 @@
 ﻿using Atelier.Interfaces.Events;
-using SkiaSharp;
+using Raylib_cs;
 
 namespace Atelier.Interfaces;
 
-public abstract class Scene
+public abstract class Scene : IDisposable
 {
 	public event ResizeEventHandler OnResize;
-	public event ClickEventHandler OnClick;
 	
-	public double Width { get; set; } = 100;
-	public double Height { get; set; } = 100;
+	public double Width { get; private set; } = 1;
+	public double Height { get; private set; } = 1;
 	
 	public virtual List<AObject> Objects { get; protected set; } = [];
 	public virtual void OnLoad() { }
 
-	public virtual void Render(SKCanvas canvas)
+	private Image _blankImage;
+	public Texture2D BlankTexture { get; private set; }
+
+	public void Init()
+	{
+		updateTexture();
+	}
+
+	private void updateTexture()
+	{
+		Raylib.UnloadTexture(BlankTexture);
+		_blankImage = Raylib.GenImageColor((int)Width, (int)Height, Color.White);
+		BlankTexture = Raylib.LoadTextureFromImage(_blankImage);
+		Raylib.UnloadImage(_blankImage);
+	}
+	
+	public virtual void Render()
 	{
 		foreach (AObject obj in Objects)
 		{
-			obj.Render(canvas);
+			obj.Parent = this;
+			obj.Render();
 		}
 	}
 
-	public virtual void Tick()
+	public virtual void Tick(double dt = 16.6)
 	{
 		foreach (AObject obj in Objects)
 		{
-			obj.Tick();
+			obj.Tick(dt);
 		}
 	}
 
 	public void Resize(double width, double height)
 	{
+		if (Math.Abs(Width - width) < 1 && Math.Abs(Height - height) < 1)
+		{
+			return;
+		}
 		Width = width;
 		Height = height;
-		OnResize(new ResizeEventArgs(width, height));
+		OnResize?.Invoke(new ResizeEventArgs(width, height));
+		updateTexture();
 	}
 
-	public void Click(ClickEventArgs e)
+	public void Dispose()
 	{
-		OnClick(e);
+		Raylib.UnloadTexture(BlankTexture);
+		foreach (AObject obj in Objects)
+		{
+			if (obj is IDisposable disposable)
+			{
+				disposable.Dispose();
+			}
+		}
 	}
 }
