@@ -2,6 +2,7 @@
 
 using AtelierRaylib;
 using AtelierTestObjects;
+using Raylib_cs;
 
 TestScene scene = new TestScene();
 

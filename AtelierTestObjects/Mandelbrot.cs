@@ -19,8 +19,8 @@ public sealed class Mandelbrot : AObject, IDisposable
             throw new InvalidOperationException("Parent should be set before initialising");
         }
         
-        _shader = Raylib.LoadShaderFromMemory(File.ReadAllText("baseVert.glsl"),
-            File.ReadAllText("mandelbrot.glsl"));
+        _shader = Raylib.LoadShaderFromMemory(File.ReadAllText("../../../baseVert.glsl"),
+            File.ReadAllText("../../../mandelbrot.glsl"));
         resLoc = Raylib.GetShaderLocation(_shader, "u_resolution");
         timeLoc = Raylib.GetShaderLocation(_shader, "u_time");
         
