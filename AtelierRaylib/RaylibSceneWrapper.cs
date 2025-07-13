@@ -31,6 +31,8 @@ public static class RaylibSceneWrapper
             double dt = (now - lastFrame) * 1000; // delta time in milliseconds
             if (dt < mspf) continue;
             
+            scene.Tick(dt);
+            
             Raylib.BeginDrawing();
             Raylib.ClearBackground(transparent);
             
@@ -40,7 +42,6 @@ public static class RaylibSceneWrapper
             Raylib.DrawText(actualMspf.ToString("F2"), 20, 20, 20, Color.White);
             Raylib.EndDrawing();
             
-            scene.Tick(dt);
             
             now = Raylib.GetTime();
             actualMspf = (now - lastFrame) * 1000;
