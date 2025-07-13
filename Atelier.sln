@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaylibTestProject", "Raylib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtelierTestObjects", "AtelierTestObjects\AtelierTestObjects.csproj", "{DED33564-8815-4F3F-85CC-D7AFD39EDE12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Physics", "Physics\Physics.csproj", "{142A3864-98BE-4804-903D-29CF5CE9744F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vectors", "Vectors\Vectors.csproj", "{68F89E01-6071-476E-AECA-AE022AF8BBAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{DED33564-8815-4F3F-85CC-D7AFD39EDE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DED33564-8815-4F3F-85CC-D7AFD39EDE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DED33564-8815-4F3F-85CC-D7AFD39EDE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{142A3864-98BE-4804-903D-29CF5CE9744F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142A3864-98BE-4804-903D-29CF5CE9744F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142A3864-98BE-4804-903D-29CF5CE9744F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142A3864-98BE-4804-903D-29CF5CE9744F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68F89E01-6071-476E-AECA-AE022AF8BBAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68F89E01-6071-476E-AECA-AE022AF8BBAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68F89E01-6071-476E-AECA-AE022AF8BBAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68F89E01-6071-476E-AECA-AE022AF8BBAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

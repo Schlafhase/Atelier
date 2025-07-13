@@ -39,7 +39,7 @@ public abstract class Scene : IDisposable
 
 	public void Resize(double width, double height)
 	{
-		if (Math.Abs(Width - width) < 1 && Math.Abs(Height - height) < 1)
+		if ((int)Width == (int)width && (int)Height == (int)height)
 		{
 			return;
 		}
