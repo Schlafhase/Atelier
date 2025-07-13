@@ -16,7 +16,7 @@ public static class RaylibSceneWrapper
         Raylib.SetConfigFlags(ConfigFlags.TransparentWindow);
         Raylib.SetConfigFlags(ConfigFlags.ResizableWindow);
         Raylib.SetConfigFlags(ConfigFlags.MaximizedWindow);
-        Raylib.InitWindow(800, 600, "AtelierRaylib");
+        Raylib.InitWindow((int)(Raylib.GetScreenWidth() * 0.8), (int)(Raylib.GetScreenHeight() * 0.8), "AtelierRaylib");
         Raylib.SetExitKey(KeyboardKey.Null);
         scene.Init();
 

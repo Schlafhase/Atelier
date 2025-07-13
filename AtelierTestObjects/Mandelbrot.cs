@@ -3,7 +3,7 @@ using Raylib_cs;
 
 namespace AtelierTestObjects;
 
-public sealed class Mandelbrot : AObject, IDisposable
+public sealed class Mandelbrot : AObject, IDisposable, INoCameraObject
 {
     private Shader _shader;
     private int resLoc;

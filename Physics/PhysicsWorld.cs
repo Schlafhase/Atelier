@@ -7,18 +7,11 @@ namespace Physics;
 public class PhysicsWorld : AObject
 {
     public List<PhysicsObject> PhysicsObjects { get; set; } = [];
+    
+    private bool _mouseDown;
 
     public override void Tick(double dt = 16.6)
     {
-        if (Raylib.IsMouseButtonDown(MouseButton.Right))
-        {
-            PhysicsObjects.Add(new PhysicsRectangle()
-            {
-                Position = (Vec2)Raylib.GetMousePosition() - 50,
-                Size = new Vec2(100)
-            });
-        }
-        
         foreach (PhysicsObject obj in PhysicsObjects.Where(obj => !obj.KeepPosition))
         {
             obj.Velocity += Vec2.Down * 9.81 * dt;

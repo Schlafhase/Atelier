@@ -10,4 +10,8 @@
       <PackageReference Include="Raylib-cs" Version="7.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Vectors\Vectors.csproj" />
+    </ItemGroup>
+
 </Project>
