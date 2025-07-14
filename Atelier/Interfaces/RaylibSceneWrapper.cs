@@ -1,7 +1,6 @@
-using Atelier.Interfaces;
 using Raylib_cs;
 
-namespace AtelierRaylib;
+namespace Atelier.Interfaces;
 
 public static class RaylibSceneWrapper
 {
