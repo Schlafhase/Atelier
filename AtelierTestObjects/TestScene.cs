@@ -12,6 +12,8 @@ public sealed class TestScene : TwoDCameraScene
     private readonly Mandelbrot _mandelbrot = new();
     private readonly PhysicsWorld _physWorld = new();
     private readonly ConwaysGameOL _cgol = new();
+    private bool _drawing;
+    private Vec2 _lastDrawPos;
 
     public TestScene()
     {
@@ -41,10 +43,39 @@ public sealed class TestScene : TwoDCameraScene
     {
         base.Tick(dt);
 
-        if (Raylib.IsMouseButtonDown(MouseButton.Right))
+        if (Raylib.IsMouseButtonPressed(MouseButton.Right))
+        {
+            _lastDrawPos = ToWorldSpace(Raylib.GetMousePosition()) - 0.5;
+            _drawing = true;
+        }
+
+        if (Raylib.IsMouseButtonReleased(MouseButton.Right))
+        {
+            _drawing = false;
+        }
+
+        if (_drawing)
         {
             Vec2 pos = ToWorldSpace(Raylib.GetMousePosition()) - 0.5;
-            _cgol.Occupied.Add(((int)Math.Round((pos.X)), (int)Math.Round(pos.Y)));
+
+            int x = (int)Math.Round(_lastDrawPos.X);
+            int y = (int)Math.Round(_lastDrawPos.Y);
+
+            while (x != (int)Math.Round(pos.X))
+            {
+                _cgol.Occupied.Add((x, y));
+                x += (int)Math.Round(_lastDrawPos.X) > (int)Math.Round(pos.X) ? -1 : 1;
+            }
+
+            while (y != (int)Math.Round(pos.Y))
+            {
+                _cgol.Occupied.Add((x, y));
+                y += (int)Math.Round(_lastDrawPos.Y) > (int)Math.Round(pos.Y) ? -1 : 1;
+            }
+            
+            _cgol.Occupied.Add(((int)Math.Round(pos.X), (int)Math.Round(pos.Y)));
+
+            _lastDrawPos = pos;
         }
 
         if (Raylib.IsKeyPressed(KeyboardKey.Space))
@@ -71,6 +102,9 @@ public sealed class TestScene : TwoDCameraScene
 
     public override void Render()
     {
+        _cgol.VisibleBoundsStart = ToWorldSpace(new Vec2(0)) - 1;
+        _cgol.VisibleBoundsEnd = ToWorldSpace(new Vec2(Raylib.GetRenderWidth(), Raylib.GetRenderHeight()));
+        
         base.Render();
         if (_cgol.Paused)
         {
@@ -79,7 +113,6 @@ public sealed class TestScene : TwoDCameraScene
             Vec2 start = ToWorldSpace(new Vec2(0)) - 1;
             Vec2 end = ToWorldSpace(new Vec2(Raylib.GetRenderWidth(), Raylib.GetRenderHeight())) + 1;
             Vec2 count = (end - start);
-            Console.WriteLine(count);
 
             for (int x = (int)start.X; x <= count.X + start.X; x++)
             {

@@ -19,16 +19,19 @@ public static class RaylibSceneWrapper
         Raylib.SetExitKey(KeyboardKey.Null);
         scene.Init();
 
-        double lastFrame = Raylib.GetTime();
+        double lastFrame = double.MinValue;
         Color transparent = new Color(0, 0, 0, 0);
 
         double actualMspf = 0;
 
         while (!Raylib.WindowShouldClose())
         {
+            // TODO: make non blocking
             double now = Raylib.GetTime();
             double dt = (now - lastFrame) * 1000; // delta time in milliseconds
             if (dt < mspf) continue;
+            double lastFrameTemp = lastFrame;
+            lastFrame = now;
             
             scene.Tick(dt);
             
@@ -43,8 +46,7 @@ public static class RaylibSceneWrapper
             
             
             now = Raylib.GetTime();
-            actualMspf = (now - lastFrame) * 1000;
-            lastFrame = now;
+            actualMspf = (now - lastFrameTemp) * 1000;
         }
         
         scene.Dispose();

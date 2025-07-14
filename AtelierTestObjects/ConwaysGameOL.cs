@@ -6,28 +6,31 @@ namespace AtelierTestObjects;
 
 public class ConwaysGameOL : AObject
 {
-    public HashSet<(int x, int y)> Occupied { get; set; } = [(0,0), (0,1), (1, 0), (1, 1)];
+    public HashSet<(int x, int y)> Occupied { get; set; } = [(0, 0), (0, 1), (1, 0), (1, 1)];
     public bool Paused { get; set; }
+    public Vec2 VisibleBoundsStart { get; set; } = new Vec2(int.MinValue);
+    public Vec2 VisibleBoundsEnd { get; set; } = new Vec2(int.MaxValue);
 
     private double _timeSinceLastUpdate = 0;
-    
-    
+
+
     public override void Tick(double dt = 16.6)
     {
         if (Paused)
         {
             return;
         }
-        
+
         _timeSinceLastUpdate += dt;
         if (_timeSinceLastUpdate < 100)
         {
             return;
         }
+
         _timeSinceLastUpdate = 0;
-        
+
         HashSet<(int x, int y)> newState = [];
-        
+
         foreach ((int x, int y) in Occupied)
         {
             int liveNeighbors = countLiveNeighbours(x, y, newState);
@@ -38,7 +41,7 @@ public class ConwaysGameOL : AObject
                 newState.Add((x, y));
             }
         }
-        
+
         Occupied = newState;
     }
 
@@ -62,7 +65,7 @@ public class ConwaysGameOL : AObject
                 else if (liveCell)
                 {
                     int neighboursLiveNeighbours = countLiveNeighbours(x + xNeighbour, y + yNeighbour, newState, false);
-                    
+
                     if (neighboursLiveNeighbours == 3)
                     {
                         newState.Add((x + xNeighbour, y + yNeighbour));
@@ -78,8 +81,15 @@ public class ConwaysGameOL : AObject
     {
         foreach ((int x, int y) in Occupied)
         {
+            if (x > VisibleBoundsEnd.X ||
+                x < VisibleBoundsStart.X ||
+                y > VisibleBoundsEnd.Y ||
+                y < VisibleBoundsStart.Y)
+            {
+                continue;
+            }
+
             Raylib.DrawRectangle(x, y, 1, 1, Raylib.Fade(Color.SkyBlue, Paused ? 0.7f : 1));
         }
-        
     }
 }
