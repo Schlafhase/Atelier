@@ -1,14 +1,12 @@
 ﻿using Atelier.Interfaces;
-using Raylib_cs;
 using Vectors;
 
 namespace Physics;
 
 public class PhysicsWorld : AObject
 {
-    public List<PhysicsObject> PhysicsObjects { get; set; } = [];
-    
     private bool _mouseDown;
+    public List<PhysicsObject> PhysicsObjects { get; set; } = [];
 
     public override void Tick(double dt = 16.6)
     {

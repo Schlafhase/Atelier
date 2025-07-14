@@ -6,12 +6,11 @@ namespace AtelierTestObjects;
 
 public class ConwaysGameOL : AObject
 {
+    private double _timeSinceLastUpdate;
     public HashSet<(int x, int y)> Occupied { get; set; } = [(0, 0), (0, 1), (1, 0), (1, 1)];
     public bool Paused { get; set; }
-    public Vec2 VisibleBoundsStart { get; set; } = new Vec2(int.MinValue);
-    public Vec2 VisibleBoundsEnd { get; set; } = new Vec2(int.MaxValue);
-
-    private double _timeSinceLastUpdate = 0;
+    public Vec2 VisibleBoundsStart { get; set; } = new(int.MinValue);
+    public Vec2 VisibleBoundsEnd { get; set; } = new(int.MaxValue);
 
 
     public override void Tick(double dt = 16.6)

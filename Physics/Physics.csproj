@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Atelier\Atelier.csproj" />
-      <ProjectReference Include="..\Vectors\Vectors.csproj" />
+        <ProjectReference Include="..\Atelier\Atelier.csproj"/>
+        <ProjectReference Include="..\Vectors\Vectors.csproj"/>
     </ItemGroup>
 
 </Project>

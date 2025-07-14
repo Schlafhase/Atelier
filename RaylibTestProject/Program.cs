@@ -2,8 +2,13 @@
 
 using Atelier.Interfaces;
 using AtelierTestObjects;
-using Raylib_cs;
 
-TestScene scene = new TestScene();
+internal class Program
+{
+    public static void Main(string[] args)
+    {
+        TestScene scene = new();
 
-RaylibSceneWrapper.OpenWindow(scene, 16.6);
+        RaylibSceneWrapper.OpenWindow(scene, 16.6);
+    }
+}

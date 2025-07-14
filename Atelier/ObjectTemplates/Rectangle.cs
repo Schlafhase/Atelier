@@ -5,13 +5,13 @@ namespace Atelier.ObjectTemplates;
 
 public class Rectangle : AObject
 {
-	public Color Color { get; set; }
-	public double Width { get; set; }
-	public double Height { get; set; }
-	
+    public Color Color { get; set; }
+    public double Width { get; set; }
+    public double Height { get; set; }
 
-	public override void Render()
-	{
-		Raylib.DrawRectangle((int)X, (int)Y, (int)Width, (int)Height, Color);
-	}
+
+    public override void Render()
+    {
+        Raylib.DrawRectangle((int)X, (int)Y, (int)Width, (int)Height, Color);
+    }
 }

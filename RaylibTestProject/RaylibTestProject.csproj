@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AtelierTestObjects\AtelierTestObjects.csproj" />
+        <ProjectReference Include="..\AtelierTestObjects\AtelierTestObjects.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Raylib-cs" Version="7.0.1" />
+        <PackageReference Include="Raylib-cs" Version="7.0.1"/>
     </ItemGroup>
 
 </Project>

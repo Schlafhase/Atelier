@@ -8,28 +8,28 @@ namespace AtelierTestObjects;
 
 public sealed class TestScene : TwoDCameraScene
 {
-    private readonly Rectangle _rect = new() { Color = Color.Red, Width = 100, Height = 100 };
+    private readonly ConwaysGameOL _cgol = new();
     private readonly Mandelbrot _mandelbrot = new();
     private readonly PhysicsWorld _physWorld = new();
-    private readonly ConwaysGameOL _cgol = new();
+    private readonly Rectangle _rect = new() { Color = Color.Red, Width = 100, Height = 100 };
     private bool _drawing;
     private Vec2 _lastDrawPos;
 
     public TestScene()
     {
-        _physWorld.PhysicsObjects.Add(new PhysicsRectangle()
+        _physWorld.PhysicsObjects.Add(new PhysicsRectangle
         {
             Position = new Vec2(20, 20),
             Size = new Vec2(100, 100)
         });
 
-        _physWorld.PhysicsObjects.Add(new PhysicsRectangle()
+        _physWorld.PhysicsObjects.Add(new PhysicsRectangle
         {
             Position = new Vec2(200, 20),
             Size = new Vec2(100, 100)
         });
 
-        _physWorld.PhysicsObjects.Add(new PhysicsRectangle()
+        _physWorld.PhysicsObjects.Add(new PhysicsRectangle
         {
             Position = new Vec2(0, 200),
             Size = new Vec2(1000, 100),
@@ -72,7 +72,7 @@ public sealed class TestScene : TwoDCameraScene
                 _cgol.Occupied.Add((x, y));
                 y += (int)Math.Round(_lastDrawPos.Y) > (int)Math.Round(pos.Y) ? -1 : 1;
             }
-            
+
             _cgol.Occupied.Add(((int)Math.Round(pos.X), (int)Math.Round(pos.Y)));
 
             _lastDrawPos = pos;
@@ -104,7 +104,7 @@ public sealed class TestScene : TwoDCameraScene
     {
         _cgol.VisibleBoundsStart = ToWorldSpace(new Vec2(0)) - 1;
         _cgol.VisibleBoundsEnd = ToWorldSpace(new Vec2(Raylib.GetRenderWidth(), Raylib.GetRenderHeight()));
-        
+
         base.Render();
         if (_cgol.Paused)
         {
@@ -112,7 +112,7 @@ public sealed class TestScene : TwoDCameraScene
 
             Vec2 start = ToWorldSpace(new Vec2(0)) - 1;
             Vec2 end = ToWorldSpace(new Vec2(Raylib.GetRenderWidth(), Raylib.GetRenderHeight())) + 1;
-            Vec2 count = (end - start);
+            Vec2 count = end - start;
 
             for (int x = (int)start.X; x <= count.X + start.X; x++)
             {
@@ -126,7 +126,7 @@ public sealed class TestScene : TwoDCameraScene
 
             Raylib.EndMode2D();
         }
-        
+
         Vec2 mousePos = ToWorldSpace(Raylib.GetMousePosition());
         Raylib.DrawText(mousePos.ToString(), 160, 20, 20, Color.White);
     }
